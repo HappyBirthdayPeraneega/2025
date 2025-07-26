@@ -1,0 +1,208 @@
+```
+`birthday-wish/index.html`
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffeef8 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .title-font {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background: #ff69b4;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .photo-frame {
+            border: 8px solid white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        .message-box {
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .cake-candle {
+            animation: flicker 2s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            25%, 75% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(0.95);
+            }
+        }
+        
+        #audioControl {
+            transition: all 0.3s ease;
+        }
+        
+        #audioControl:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute w-full h-full z-0">
+        <div class="balloon" style="left: 10%; animation-delay: 1s; background: #ff69b4;"></div>
+        <div class="balloon" style="left: 20%; animation-delay: 3s; background: #9370db;"></div>
+        <div class="balloon" style="left: 30%; animation-delay: 5s; background: #ff8c00;"></div>
+        <div class="balloon" style="left: 70%; animation-delay: 2s; background: #ff1493;"></div>
+        <div class="balloon" style="left: 80%; animation-delay: 4s; background: #32cd32;"></div>
+        <div class="balloon" style="left: 90%; animation-delay: 6s; background: #00bfff;"></div>
+    </div>
+
+    <!-- Audio Player (Hidden autoplay with controls as backup) -->
+    <audio id="birthdayAudio" loop>
+        <source src="assets/happy-birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <!-- Header -->
+        <header class="text-center mb-12 animate__animated animate__fadeIn">
+            <h1 class="title-font text-5xl md:text-7xl text-pink-600 mb-4">Happy Birthday!</h1>
+            <h2 class="text-2xl text-gray-700">To My Amazing Friend</h2>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Photo Section -->
+            <div class="flex justify-center mb-12 animate__animated animate__fadeInUp">
+                <div class="photo-frame rounded-lg overflow-hidden w-full max-w-md">
+                    <img src="assets/birthday-photo.jpg" alt="Birthday celebration with friends at a party venue with balloons and cake" class="w-full h-auto">
+                </div>
+            </div>
+
+            <!-- Birthday Message -->
+            <div class="max-w-2xl mx-auto bg-white bg-opacity-90 backdrop-blur-sm rounded-xl p-8 shadow-xl message-box animate__animated animate__fadeIn animate__delay-1s">
+                <h3 class="title-font text-3xl text-center text-pink-600 mb-4">Dear <span id="friendName">Friend</span>,</h3>
+                <p class="text-gray-700 mb-4">On your special day, I just want to take a moment to tell you how much you mean to me.</p>
+                <p class="text-gray-700 mb-4">You're one of the most incredible people I know - kind, funny, and always there when it matters. The world is brighter with you in it!</p>
+                <p class="text-gray-700 mb-4">May this year bring you happiness, success, and all the wonderful things you deserve. Keep shining!</p>
+                <p class="title-font text-2xl text-center text-pink-500 mt-6">Happy Birthday! 🎉</p>
+            </div>
+
+            <!-- Cake Animation -->
+            <div class="flex justify-center mt-12">
+                <div class="relative w-40 h-40">
+                    <div class="absolute bottom-0 w-full h-20 bg-amber-200 rounded-t-full"></div>
+                    <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-pink-400 rounded-full"></div>
+                    <div class="cake-candle absolute bottom-28 left-1/2 transform -translate-x-1/2 w-1 h-12 bg-yellow-300 rounded-b-sm">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-yellow-200 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Audio Controls -->
+        <div class="fixed bottom-6 right-6">
+            <button id="audioControl" class="bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-full shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-gray-600 text-sm relative z-10">
+        Made with ❤️ for your special day!
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('birthdayAudio');
+            const audioControl = document.getElementById('audioControl');
+            let isPlaying = false;
+
+            // Ask for name
+            const name = prompt("Enter your friend's name:");
+            if (name) {
+                document.getElementById('friendName').textContent = name;
+            }
+
+            // Audio control
+            audioControl.addEventListener('click', function() {
+                if (isPlaying) {
+                    audio.pause();
+                    audioControl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>';
+                } else {
+                    audio.play();
+                    audioControl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>';
+                }
+                isPlaying = !isPlaying;
+            });
+
+            // Create floating balloons on click
+            document.addEventListener('click', function(e) {
+                if (e.target !== audioControl) {
+                    createBalloon(e.clientX, e.clientY);
+                }
+            });
+
+            function createBalloon(x, y) {
+                const colors = ['#ff69b4', '#9370db', '#ff8c00', '#ff1493', '#32cd32', '#00bfff'];
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = x + 'px';
+                balloon.style.top = y + 'px';
+                balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDuration = (6 + Math.random() * 5) + 's';
+                document.body.appendChild(balloon);
+
+                // Remove balloon after animation completes
+                setTimeout(() => {
+                    balloon.remove();
+                }, 8000);
+            }
+        });
+    </script>
+</body>
+</html>
+```
